@@ -11,8 +11,8 @@ from dclab.lme4 import rsetup
 from PyQt5 import uic, QtCore, QtWidgets
 from PyQt5.QtCore import QStandardPaths
 
-from .widgets import show_wait_cursor
-from ..extensions import ExtensionManager, SUPPORTED_FORMATS
+from shapeout2.gui.widgets import show_wait_cursor
+from shapeout2.extensions import ExtensionManager, SUPPORTED_FORMATS
 
 
 if isinstance(rpy2, MockRPackage):

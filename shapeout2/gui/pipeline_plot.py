@@ -12,11 +12,11 @@ from pyqtgraph import exporters
 from pyqtgraph.graphicsItems.GradientEditorItem import Gradients
 
 
-from .. import plot_cache
-from .. import util
-from .widgets import ShapeOutColorBarItem
+from shapeout2 import plot_cache
+from shapeout2 import util
+from shapeout2.gui.widgets import ShapeOutColorBarItem
 
-from .widgets import SimplePlotItem
+from shapeout2.gui.widgets import SimplePlotItem
 
 
 # Register custom colormaps

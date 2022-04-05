@@ -17,22 +17,22 @@ from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QStandardPaths
 import pyqtgraph as pg
 
-from . import analysis
-from . import bulk
-from . import compute
-from . import dcor
-from . import export
-from . import pipeline_plot
-from . import preferences
-from . import quick_view
-from . import update
-from . import widgets
+from shapeout2.gui import analysis
+from shapeout2.gui import bulk
+from shapeout2.gui import compute
+from shapeout2.gui import dcor
+from shapeout2.gui import export
+from shapeout2.gui import pipeline_plot
+from shapeout2.gui import preferences
+from shapeout2.gui import quick_view
+from shapeout2.gui import update
+from shapeout2.gui import widgets
 
-from ..extensions import ExtensionManager
-from .. import pipeline
-from .. import session
+from shapeout2.extensions import ExtensionManager
+from shapeout2 import pipeline
+from shapeout2 import session
 
-from .._version import version
+from shapeout2._version import version
 
 
 # global plotting configuration parameters
