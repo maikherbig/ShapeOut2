@@ -7,6 +7,7 @@ from PyQt5 import uic, QtCore, QtWidgets
 import pyqtgraph as pg
 from scipy.ndimage import binary_erosion
 
+import h5py
 from shapeout2.gui.compute.comp_stats import STAT_METHODS
 from shapeout2.gui import idiom
 from shapeout2.gui.widgets import show_wait_cursor
@@ -238,7 +239,13 @@ class QuickView(QtWidgets.QWidget):
     def get_event_image(self, ds, event):
         state = self.__getstate__()
         imkw = self.imkw.copy()
-        cellimg = ds["image"][event]
+        #image channel to be displayed
+        layer = self.comboBox_layer.currentData()
+        #I could not find a way to get anther image channel using dclab
+        #Hence, load .rtdc file using h5py
+        ds = h5py.File(ds.path,mode='r')
+        cellimg = ds["events"][layer][event]
+
         # apply background correction
         if "image_bg" in ds:
             if state["event"]["image background"]:
@@ -257,11 +264,15 @@ class QuickView(QtWidgets.QWidget):
         cellimg = np.clip(cellimg, 0, 255)
         cellimg = np.require(cellimg, np.uint8, 'C')
 
+
         # Only load contour data if there is an image column.
         # We don't know how big the images should be so we
         # might run into trouble displaying random contours.
-        if "mask" in ds and len(ds["mask"]) > event:
-            mask = ds["mask"][event]
+        if "mask" in ds["events"] and len(ds["events"]["mask"]) > event:
+            mask = ds["events"]["mask"][event]
+            #binarize mask
+            mask = np.clip(mask,0,1).astype(bool)
+
             if state["event"]["image contour"]:
                 # Compute contour image from mask. If you are wondering
                 # whether this is kosher, please take a look at issue #76:
@@ -328,7 +339,13 @@ class QuickView(QtWidgets.QWidget):
             point = self.widget_scatter.scatter.pointAt(spos)
             # get corrected index
             event = np.where(plotted)[0][point.index()]
-            if "image" in self.rtdc_ds:
+            
+            layer = self.comboBox_layer.currentData()
+            #I could not find a way to get anther image channel using dclab
+            #Hence, load .rtdc file using h5py
+            ds = h5py.File(self.rtdc_ds.path,mode='r')
+
+            if layer in ds["events"]:
                 cellimg, imkw = self.get_event_image(self.rtdc_ds, event)
                 self.imageView_image_poly.setImage(cellimg, **imkw)
                 self.imageView_image_poly.show()
@@ -727,6 +744,22 @@ class QuickView(QtWidgets.QWidget):
                 if idcur >= 0:
                     cb.setCurrentIndex(idcur)
                 cb.blockSignals(blocked)
+
+            #find keys of image_channels
+            keys_2d = []
+            #I could not figure out how to read ALL features from .rtdc file
+            #Hence, load again using h5py
+            _rtdc_ds = h5py.File(self.rtdc_ds.path,mode='r')
+            for key in list(_rtdc_ds["events"].keys()):
+                if type(_rtdc_ds["events"][key])==h5py._hl.dataset.Dataset:
+                    shape = _rtdc_ds["events"][key].shape
+                    if len(shape)==3: #two-dimensional info (images)
+                        keys_2d.append(key)
+                    elif len(shape)==4: #two-dimensional RBG info (images)
+                        keys_2d.append(key)
+            for key in keys_2d:
+                self.comboBox_layer.addItem(key,key)
+
 
     def update_polygon_panel(self):
         """Update polygon filter combobox etc."""
