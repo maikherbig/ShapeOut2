@@ -5,13 +5,13 @@ import dclab
 import numpy as np
 from PyQt5 import uic, QtCore, QtWidgets
 
-from ...pipeline import Plot
-from ...pipeline.plot import STATE_OPTIONS
+from shapeout2.pipeline import Plot
+from shapeout2.pipeline.plot import STATE_OPTIONS
 
-from ..pipeline_plot import (
+from shapeout2.gui.pipeline_plot import (
     compute_contours, compute_contour_opening_angles, compute_contour_reliable)
 
-from ..widgets import show_wait_cursor
+from shapeout2.gui.widgets import show_wait_cursor
 
 COLORMAPS = STATE_OPTIONS["scatter"]["colormap"]
 

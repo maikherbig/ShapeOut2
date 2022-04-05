@@ -7,10 +7,10 @@ from dclab.features.emodulus.viscosity import KNOWN_MEDIA
 import numpy as np
 from PyQt5 import uic, QtCore, QtWidgets
 
-from ... import meta_tool
-from ...pipeline import Dataslot
+from shapeout2 import meta_tool
+from shapeout2.pipeline import Dataslot
 
-from .dlg_slot_reorder import DlgSlotReorder
+from shapeout2.gui.analysis.dlg_slot_reorder import DlgSlotReorder
 
 
 class SlotPanel(QtWidgets.QWidget):

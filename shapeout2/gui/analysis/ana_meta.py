@@ -5,7 +5,7 @@ import dclab
 import numpy as np
 from PyQt5 import uic, QtCore, QtWidgets
 
-from ... import meta_tool
+from shapeout2 import meta_tool
 
 
 class MetaPanel(QtWidgets.QWidget):

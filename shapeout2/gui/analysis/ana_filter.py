@@ -5,10 +5,10 @@ from PyQt5 import uic, QtCore, QtWidgets
 
 import dclab
 
-from ...pipeline import Filter
+from shapeout2.pipeline import Filter
 
-from ..widgets import RangeControl
-from .. import idiom
+from shapeout2.gui.widgets import RangeControl
+from shapeout2.gui import idiom
 
 
 class FilterPanel(QtWidgets.QWidget):
