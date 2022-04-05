@@ -23,7 +23,7 @@ def main(splash=True):
         app.processEvents(QEventLoop.AllEvents, 300)
 
     from PyQt5 import QtCore, QtGui
-    from .gui import ShapeOut2
+    from shapeout2.gui import ShapeOut2
 
     # Set Application Icon
     icon_path = os.path.join(imdir, "icon.png")

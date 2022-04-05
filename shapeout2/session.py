@@ -10,8 +10,8 @@ import zipfile
 
 import dclab
 
-from .pipeline import Dataslot, Filter, Pipeline, Plot
-from ._version import version
+from shapeout2.pipeline import Dataslot, Filter, Pipeline, Plot
+from shapeout2._version import version
 
 
 class DataFileNotFoundError(BaseException):

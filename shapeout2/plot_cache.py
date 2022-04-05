@@ -1,5 +1,5 @@
 """Facilitate caching of plot data"""
-from . import util
+from shapeout2 import util
 
 
 def get_contour_data(rtdc_ds, xax, yax, xacc, yacc, xscale, yscale,
