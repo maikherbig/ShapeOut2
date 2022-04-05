@@ -4,10 +4,10 @@ import webbrowser
 from dclab import lme4
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 
-from .comp_lme4_dataset import LME4Dataset
-from .comp_lme4_results import Rlme4ResultsDialog
+from shapeout2.gui.compute.comp_lme4_dataset import LME4Dataset
+from shapeout2.gui.compute.comp_lme4_results import Rlme4ResultsDialog
 
-from ..widgets import ShowWaitCursor
+from shapeout2.gui.widgets import ShowWaitCursor
 
 
 class ComputeSignificance(QtWidgets.QDialog):

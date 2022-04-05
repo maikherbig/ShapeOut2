@@ -2,7 +2,7 @@ import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pyqtgraph as pg
 
-from .simple_plot_widget import SimpleViewBox
+from shapeout2.gui.widgets.simple_plot_widget import SimpleViewBox
 
 
 class SimpleImageView(pg.ImageView):

@@ -2,7 +2,7 @@ import pkg_resources
 
 from PyQt5 import uic, QtCore, QtWidgets
 
-from ... import pipeline
+from shapeout2 import pipeline
 
 
 class MatrixPlot(QtWidgets.QWidget):

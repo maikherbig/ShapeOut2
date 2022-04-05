@@ -2,7 +2,7 @@ import pkg_resources
 
 from PyQt5 import uic, QtGui, QtWidgets
 
-from ... import meta_tool
+from shapeout2 import meta_tool
 
 
 class LME4Dataset(QtWidgets.QDialog):

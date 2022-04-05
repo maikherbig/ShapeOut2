@@ -2,10 +2,10 @@ import copy
 
 from PyQt5 import QtCore, QtWidgets
 
-from ... import pipeline
+from shapeout2 import pipeline
 
-from .pm_element import MatrixElement
-from .pm_plot import MatrixPlot
+from shapeout2.gui.matrix.pm_element import MatrixElement
+from shapeout2.gui.matrix.pm_plot import MatrixPlot
 
 
 class PlotMatrix(QtWidgets.QWidget):

@@ -1,3 +1,3 @@
 # flake8: noqa: F401
-from .comp_lme4 import ComputeSignificance
-from .comp_stats import ComputeStatistics
+from shapeout2.gui.compute.comp_lme4 import ComputeSignificance
+from shapeout2.gui.compute.comp_stats import ComputeStatistics

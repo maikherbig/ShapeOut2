@@ -3,11 +3,11 @@ import copy
 import numpy as np
 from PyQt5 import QtCore, QtWidgets
 
-from ... import pipeline
+from shapeout2 import pipeline
 
-from .dm_dataset import MatrixDataset
-from .dm_filter import MatrixFilter
-from .dm_element import MatrixElement
+from shapeout2.gui.matrix.dm_dataset import MatrixDataset
+from shapeout2.gui.matrix.dm_filter import MatrixFilter
+from shapeout2.gui.matrix.dm_element import MatrixElement
 
 
 class DataMatrix(QtWidgets.QWidget):

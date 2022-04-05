@@ -1,4 +1,4 @@
-from . import dm_element
+from shapeout2.gui.matrix import dm_element
 
 
 class MatrixElement(dm_element.MatrixElement):

@@ -7,9 +7,9 @@ from PyQt5 import uic, QtCore, QtWidgets
 import pyqtgraph as pg
 from scipy.ndimage import binary_erosion
 
-from ..compute.comp_stats import STAT_METHODS
-from .. import idiom
-from ..widgets import show_wait_cursor
+from shapeout2.gui.compute.comp_stats import STAT_METHODS
+from shapeout2.gui import idiom
+from shapeout2.gui.widgets import show_wait_cursor
 
 
 class QuickView(QtWidgets.QWidget):

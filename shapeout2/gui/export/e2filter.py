@@ -5,8 +5,8 @@ from PyQt5 import uic, QtWidgets
 
 import dclab
 
-from ... import session
-from ...util import get_valid_filename
+from shapeout2 import session
+from shapeout2.util import get_valid_filename
 
 
 class ExportFilter(QtWidgets.QDialog):

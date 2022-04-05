@@ -1,13 +1,13 @@
 # flake8: noqa: F401
-from .bg_thread import run_async
-from .double_spin_box_nan import DoubleSpinBoxNan
-from .key_value_table_widget import KeyValueTableWidget
-from .mdi_subwindow_wo_close import MDISubWindowWOButtons
-from .qrangeslider import QRangeSlider
-from .rangecontrol import RangeControl
-from .simple_image_view import SimpleImageView
-from .simple_plot_widget import (SimplePlotItem,
+from shapeout2.gui.widgets.bg_thread import run_async
+from shapeout2.gui.widgets.double_spin_box_nan import DoubleSpinBoxNan
+from shapeout2.gui.widgets.key_value_table_widget import KeyValueTableWidget
+from shapeout2.gui.widgets.mdi_subwindow_wo_close import MDISubWindowWOButtons
+from shapeout2.gui.widgets.qrangeslider import QRangeSlider
+from shapeout2.gui.widgets.rangecontrol import RangeControl
+from shapeout2.gui.widgets.simple_image_view import SimpleImageView
+from shapeout2.gui.widgets.simple_plot_widget import (SimplePlotItem,
                                  SimplePlotWidget,
                                  SimpleViewBox)
-from .so_colorbaritem import ShapeOutColorBarItem
-from .wait_cursor import show_wait_cursor, ShowWaitCursor
+from shapeout2.gui.widgets.so_colorbaritem import ShapeOutColorBarItem
+from shapeout2.gui.widgets.wait_cursor import show_wait_cursor, ShowWaitCursor

@@ -7,8 +7,8 @@ import time
 import dclab
 from PyQt5 import uic, QtCore, QtWidgets
 
-from ..widgets import show_wait_cursor
-from ..._version import version
+from shapeout2.gui.widgets import show_wait_cursor
+from shapeout2._version import version
 
 STAT_METHODS = sorted(dclab.statistics.Statistics.available_methods.keys())
 STAT_METHODS.remove("%-gated")  # This does not make sense with Pipeline

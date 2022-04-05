@@ -7,7 +7,7 @@ import webbrowser
 import dclab
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 
-from ..widgets import show_wait_cursor, run_async
+from shapeout2.gui.widgets import show_wait_cursor, run_async
 
 
 class DCORLoader(QtWidgets.QDialog):

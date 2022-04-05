@@ -4,10 +4,10 @@ import pkg_resources
 from PyQt5 import uic, QtCore, QtWidgets
 import pyqtgraph.exporters as pge
 
-from ..pipeline_plot import PipelinePlot
-from ..widgets import show_wait_cursor
+from shapeout2.gui.pipeline_plot import PipelinePlot
+from shapeout2.gui.widgets import show_wait_cursor
 
-from ...util import get_valid_filename
+from shapeout2.util import get_valid_filename
 
 
 EXPORTERS = {

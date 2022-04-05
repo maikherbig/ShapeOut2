@@ -3,10 +3,10 @@ from PyQt5 import QtCore
 import pyqtgraph as pg
 from pyqtgraph.graphicsItems.GradientEditorItem import Gradients
 
-from ... import plot_cache
+from shapeout2 import plot_cache
 
-from .. import pipeline_plot
-from ..widgets import SimplePlotWidget, SimpleViewBox
+from shapeout2.gui import pipeline_plot
+from shapeout2.gui.widgets import SimplePlotWidget, SimpleViewBox
 
 
 class QuickViewScatterWidget(SimplePlotWidget):

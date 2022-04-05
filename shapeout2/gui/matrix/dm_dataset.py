@@ -2,8 +2,8 @@ import pkg_resources
 
 from PyQt5 import uic, QtWidgets, QtCore, QtGui
 
-from ... import meta_tool
-from ... import pipeline
+from shapeout2 import meta_tool
+from shapeout2 import pipeline
 
 
 class MatrixDataset(QtWidgets.QWidget):
