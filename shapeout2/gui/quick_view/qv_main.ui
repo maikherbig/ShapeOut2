@@ -554,7 +554,13 @@
                    </widget>
                   </item>
                   <item row="2" column="0">
-                   <widget class="QComboBox" name="comboBox_layer_selection"/>
+                   <widget class="QComboBox" name="comboBox_layer_selection">
+                    <item>
+                     <property name="text">
+                      <string>image</string>
+                     </property>
+                    </item>
+                   </widget>
                   </item>
                  </layout>
                 </item>
