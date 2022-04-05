@@ -4,8 +4,8 @@ import dclab
 from dclab.features.emodulus.viscosity import KNOWN_MEDIA
 import numpy as np
 
-from .. import meta_tool
-from ..util import hashobj
+from shapeout2 import meta_tool
+from shapeout2.util import hashobj
 
 
 class Dataslot(object):

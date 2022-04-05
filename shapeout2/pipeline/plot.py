@@ -3,7 +3,7 @@ import copy
 import dclab
 import numpy as np
 
-from ..util import hashobj
+from shapeout2.util import hashobj
 
 
 DEFAULT_STATE = {

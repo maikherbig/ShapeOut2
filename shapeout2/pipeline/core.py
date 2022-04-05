@@ -4,10 +4,10 @@ import warnings
 import dclab
 import numpy as np
 
-from .dataslot import Dataslot
-from .filter import Filter
-from .filter_ray import FilterRay
-from .plot import Plot
+from shapeout2.pipeline.dataslot import Dataslot
+from shapeout2.pipeline.filter import Filter
+from shapeout2.pipeline.filter_ray import FilterRay
+from shapeout2.pipeline.plot import Plot
 
 
 class EmptyDatasetWarning(UserWarning):

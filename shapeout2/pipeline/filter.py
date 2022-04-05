@@ -3,7 +3,7 @@ import copy
 
 import dclab
 
-from ..util import hashobj
+from shapeout2.util import hashobj
 
 
 class Filter(object):
