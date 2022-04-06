@@ -235,31 +235,86 @@ class QuickView(QtWidgets.QWidget):
         # "image_bg" not in dataset
         contains_bg_feat = "image_bg" in rtdc_ds
         self.checkBox_image_background.setVisible(contains_bg_feat)
+        
+        # get number of 2D maps beside "mask" and "image"
+        #find keys of image_channels
+        keys_2d = self.get_features_2d(self.rtdc_ds)
+        if "image" in keys_2d:
+            keys_2d.remove("image")
+        if "mask" in keys_2d:
+            keys_2d.remove("mask")
+        # Hide comboBox_layer_2/3 and comboBox_layer_2/3 if only image and mask
+        # in dataset
+        if len(keys_2d)==0:
+            self.comboBox_layer_2.setVisible(False)
+            self.comboBox_cmap_2.setVisible(False)
+            self.comboBox_layer_3.setVisible(False)
+            self.comboBox_cmap_3.setVisible(False)
+
+
+    
+        
+            
+
 
     def get_event_image(self, ds, event):
         state = self.__getstate__()
         imkw = self.imkw.copy()
         #image channel to be displayed
-        layer = self.comboBox_layer.currentData()
+        layer_1 = self.comboBox_layer_1.currentData()
+        layer_2 = self.comboBox_layer_2.currentData()
+        layer_3 = self.comboBox_layer_3.currentData()
+
+        cmap_1 = self.comboBox_cmap_1.currentText()
+        cmap_2 = self.comboBox_cmap_2.currentText()
+        cmap_3 = self.comboBox_cmap_3.currentText()
+
         #I could not find a way to get anther image channel using dclab
         #Hence, load .rtdc file using h5py
         ds = h5py.File(ds.path,mode='r')
-        cellimg = ds["events"][layer][event]
-
-        # apply background correction
-        if "image_bg" in ds:
-            if state["event"]["image background"]:
-                bgimg = ds["image_bg"][event].astype(np.int16)
-                cellimg = cellimg.astype(np.int16)
-                cellimg = cellimg - bgimg + int(np.mean(bgimg))
+                
+        cellimg = ds["events"][layer_1][event]
+        # # apply background correction
+        # if "image_bg" in ds:
+        #     if state["event"]["image background"]:
+        #         bgimg = ds["image_bg"][event].astype(np.int16)
+        #         cellimg = cellimg.astype(np.int16)
+        #         cellimg = cellimg - bgimg + int(np.mean(bgimg))
         # automatic contrast
+        
         if state["event"]["image auto contrast"]:
             vmin, vmax = cellimg.min(), cellimg.max()
             cellimg = (cellimg - vmin) / (vmax - vmin) * 255
-        # convert to RGB
-        cellimg = cellimg.reshape(
-            cellimg.shape[0], cellimg.shape[1], 1)
-        cellimg = np.repeat(cellimg, 3, axis=2)
+        cellimg = cellimg.reshape(cellimg.shape[0], cellimg.shape[1], 1)
+        zero = np.zeros(shape=cellimg.shape,dtype=np.uint8)
+        if cmap_1=="gray":
+            # convert to RGB
+            cellimg = np.repeat(cellimg, 3, axis=2)
+        elif cmap_1=="red":
+            cellimg = np.c_[cellimg,zero,zero]
+
+        if cmap_2=="green":
+            green = ds["events"][layer_2][event]
+            if state["event"]["image auto contrast"]:
+                vmin, vmax = green.min(), green.max()
+                green = (green - vmin) / (vmax - vmin) * 255
+            green = green.reshape(green.shape[0], green.shape[1], 1)
+            green = np.c_[zero,green,zero]
+        else:
+            green = np.c_[zero,zero,zero]
+            
+        if cmap_3=="blue":
+            blue = ds["events"][layer_3][event]
+            if state["event"]["image auto contrast"]:
+                vmin, vmax = blue.min(), blue.max()
+                blue = (blue - vmin) / (vmax - vmin) * 255
+            blue = blue.reshape(green.shape[0], blue.shape[1], 1)
+            blue = np.c_[zero,zero,blue]
+        else:
+            blue = np.c_[zero,zero,zero]
+
+        cellimg = cellimg+green+blue
+        
         # clip and convert to int
         cellimg = np.clip(cellimg, 0, 255)
         cellimg = np.require(cellimg, np.uint8, 'C')
@@ -340,14 +395,15 @@ class QuickView(QtWidgets.QWidget):
             # get corrected index
             event = np.where(plotted)[0][point.index()]
             
-            layer = self.comboBox_layer.currentData()
+            #at least channel_1 should exist
+            layer = self.comboBox_layer_1.currentData()
             #I could not find a way to get anther image channel using dclab
             #Hence, load .rtdc file using h5py
             ds = h5py.File(self.rtdc_ds.path,mode='r')
 
             if layer in ds["events"]:
                 cellimg, imkw = self.get_event_image(self.rtdc_ds, event)
-                self.imageView_image_poly.setImage(cellimg, **imkw)
+                self.imageView_image_poly.setImage(cellimg, autoRange=False)#**imkw)
                 self.imageView_image_poly.show()
             else:
                 self.imageView_image_poly.hide()
@@ -574,7 +630,6 @@ class QuickView(QtWidgets.QWidget):
         self.spinBox_event.blockSignals(True)
         self.spinBox_event.setValue(event + 1)
         self.spinBox_event.blockSignals(False)
-
         # Update selection point in scatter plot
         self.widget_scatter.setSelection(event)
         if self.tabWidget_event.currentIndex() == 0:
@@ -582,7 +637,7 @@ class QuickView(QtWidgets.QWidget):
             state = self.__getstate__()
             if "image" in ds:
                 cellimg, imkw = self.get_event_image(ds, event)
-                self.imageView_image.setImage(cellimg, **imkw)
+                self.imageView_image.setImage(cellimg, autoRange=False)#**imkw)
                 self.groupBox_image.show()
             else:
                 self.groupBox_image.hide()
@@ -721,6 +776,20 @@ class QuickView(QtWidgets.QWidget):
         if h is not None:
             self.tableWidget_stat.set_key_vals(keys=h, vals=v)
 
+    def get_features_2d(self,rtdc_ds):
+        keys_2d = []
+        #I could not figure out how to read ALL features from .rtdc file
+        #Hence, load again using h5py
+        rtdc_ds_h5 = h5py.File(rtdc_ds.path,mode='r')
+        for key in list(rtdc_ds_h5["events"].keys()):
+            if type(rtdc_ds_h5["events"][key])==h5py._hl.dataset.Dataset:
+                shape = rtdc_ds_h5["events"][key].shape
+                if len(shape)==3: #two-dimensional info (images)
+                    keys_2d.append(key)
+                elif len(shape)==4: #two-dimensional RBG info (images)
+                    keys_2d.append(key)
+        return keys_2d
+
     def update_feature_choices(self):
         """Updates the axes comboboxes choices
 
@@ -746,19 +815,14 @@ class QuickView(QtWidgets.QWidget):
                 cb.blockSignals(blocked)
 
             #find keys of image_channels
-            keys_2d = []
-            #I could not figure out how to read ALL features from .rtdc file
-            #Hence, load again using h5py
-            _rtdc_ds = h5py.File(self.rtdc_ds.path,mode='r')
-            for key in list(_rtdc_ds["events"].keys()):
-                if type(_rtdc_ds["events"][key])==h5py._hl.dataset.Dataset:
-                    shape = _rtdc_ds["events"][key].shape
-                    if len(shape)==3: #two-dimensional info (images)
-                        keys_2d.append(key)
-                    elif len(shape)==4: #two-dimensional RBG info (images)
-                        keys_2d.append(key)
+            keys_2d = self.get_features_2d(self.rtdc_ds)
+            self.comboBox_layer_1.clear()
+            self.comboBox_layer_2.clear()
+            self.comboBox_layer_3.clear()
             for key in keys_2d:
-                self.comboBox_layer.addItem(key,key)
+                self.comboBox_layer_1.addItem(key,key)
+                self.comboBox_layer_2.addItem(key,key)
+                self.comboBox_layer_3.addItem(key,key)
 
 
     def update_polygon_panel(self):

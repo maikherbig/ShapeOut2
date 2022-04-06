@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1486</width>
-    <height>746</height>
+    <height>774</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset theme="office-chart-scatter">
-    <normaloff>../../../shapeout2/gui/quick_view</normaloff>../../../shapeout2/gui/quick_view</iconset>
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -104,7 +104,7 @@
         </property>
         <property name="icon">
          <iconset theme="gtk-preferences">
-          <normaloff>../../../shapeout2/gui/quick_view</normaloff>../../../shapeout2/gui/quick_view</iconset>
+          <normaloff>.</normaloff>.</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -130,7 +130,7 @@
         </property>
         <property name="icon">
          <iconset theme="visibility">
-          <normaloff>../../../shapeout2/gui/quick_view</normaloff>../../../shapeout2/gui/quick_view</iconset>
+          <normaloff>.</normaloff>.</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -150,7 +150,7 @@
         </property>
         <property name="icon">
          <iconset theme="path-mode-polyline">
-          <normaloff>../../../shapeout2/gui/quick_view</normaloff>../../../shapeout2/gui/quick_view</iconset>
+          <normaloff>.</normaloff>.</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -513,25 +513,8 @@
                   <property name="topMargin">
                    <number>0</number>
                   </property>
-                  <item row="0" column="1">
-                   <widget class="QCheckBox" name="checkBox_image_zoom">
-                    <property name="text">
-                     <string>Zoom to event</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QCheckBox" name="checkBox_image_contour">
-                    <property name="text">
-                     <string>Show contour</string>
-                    </property>
-                    <property name="checked">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
+                  <item row="2" column="0">
+                   <widget class="QComboBox" name="comboBox_layer_1"/>
                   </item>
                   <item row="1" column="0">
                    <widget class="QCheckBox" name="checkBox_image_contrast">
@@ -553,11 +536,79 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="0">
-                   <widget class="QComboBox" name="comboBox_layer_selection">
+                  <item row="0" column="1">
+                   <widget class="QCheckBox" name="checkBox_image_zoom">
+                    <property name="text">
+                     <string>Zoom to event</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QCheckBox" name="checkBox_image_contour">
+                    <property name="text">
+                     <string>Show contour</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="comboBox_cmap_2">
+                    <property name="editable">
+                     <bool>false</bool>
+                    </property>
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
                     <item>
                      <property name="text">
-                      <string>image</string>
+                      <string>None</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>green</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QComboBox" name="comboBox_layer_2"/>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="comboBox_cmap_1">
+                    <item>
+                     <property name="text">
+                      <string>gray</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>red</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QComboBox" name="comboBox_layer_3"/>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QComboBox" name="comboBox_cmap_3">
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>None</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>blue</string>
                      </property>
                     </item>
                    </widget>
